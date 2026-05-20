@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>AIC1 | 3D Portfolio</title>
+    <title>AIC1 | Global 3D Network</title>
     <style>
       :root {
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #f5f7fb;
-        background: #03050a;
+        color: #f7fbff;
+        background: #02040a;
       }
 
       * {
@@ -19,7 +19,7 @@
         margin: 0;
         min-height: 100vh;
         overflow: hidden;
-        background: #03050a;
+        background: #02040a;
       }
 
       canvas {
@@ -35,52 +35,52 @@
         align-items: center;
         pointer-events: none;
         background:
-          linear-gradient(90deg, rgba(3, 5, 10, 0.94), rgba(3, 5, 10, 0.38) 48%, rgba(3, 5, 10, 0.18)),
-          radial-gradient(circle at 70% 48%, rgba(0, 229, 255, 0.15), transparent 34%),
-          radial-gradient(circle at 28% 78%, rgba(255, 53, 138, 0.13), transparent 28%);
+          linear-gradient(90deg, rgba(2, 4, 10, 0.96), rgba(2, 4, 10, 0.46) 45%, rgba(2, 4, 10, 0.06)),
+          radial-gradient(circle at 74% 46%, rgba(42, 220, 255, 0.12), transparent 30%),
+          radial-gradient(circle at 20% 82%, rgba(255, 83, 173, 0.12), transparent 26%);
       }
 
       .overlay::before {
         position: absolute;
         inset: 0;
         content: "";
-        opacity: 0.24;
+        opacity: 0.18;
         background-image:
           linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
           linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
-        background-size: 68px 68px;
-        mask-image: linear-gradient(90deg, #000, transparent 70%);
+        background-size: 72px 72px;
+        mask-image: linear-gradient(90deg, #000, transparent 72%);
       }
 
       .content {
         position: relative;
-        width: min(100%, 1040px);
-        padding: clamp(32px, 7vw, 88px);
+        width: min(100%, 1020px);
+        padding: clamp(30px, 7vw, 86px);
       }
 
       .eyebrow {
         margin: 0 0 18px;
-        color: #66f6ff;
-        font-size: 0.82rem;
-        font-weight: 700;
-        letter-spacing: 0.14em;
+        color: #7af7ff;
+        font-size: 0.8rem;
+        font-weight: 800;
+        letter-spacing: 0.16em;
         text-transform: uppercase;
       }
 
       h1 {
-        max-width: 780px;
+        max-width: 760px;
         margin: 0;
-        font-size: clamp(3rem, 8.6vw, 7.6rem);
-        line-height: 0.95;
+        font-size: clamp(3rem, 8.4vw, 7.3rem);
+        line-height: 0.94;
         letter-spacing: 0;
-        text-shadow: 0 0 36px rgba(102, 246, 255, 0.22);
+        text-shadow: 0 0 42px rgba(122, 247, 255, 0.22);
       }
 
       p {
         max-width: 620px;
-        margin: 22px 0 0;
-        color: rgba(245, 247, 251, 0.8);
-        font-size: clamp(1rem, 2.4vw, 1.25rem);
+        margin: 24px 0 0;
+        color: rgba(247, 251, 255, 0.78);
+        font-size: clamp(1rem, 2.2vw, 1.22rem);
         line-height: 1.8;
       }
 
@@ -88,41 +88,9 @@
         display: flex;
         flex-wrap: wrap;
         gap: 12px;
-        margin-top: 28px;
-        color: rgba(245, 247, 251, 0.72);
+        margin-top: 30px;
+        color: rgba(247, 251, 255, 0.76);
         font-size: 0.9rem;
-      }
-
-      .signal {
-        display: grid;
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-        gap: 1px;
-        width: min(100%, 560px);
-        margin-top: 34px;
-        border: 1px solid rgba(255, 255, 255, 0.12);
-        background: rgba(255, 255, 255, 0.12);
-      }
-
-      .signal div {
-        padding: 18px 16px;
-        background: rgba(3, 5, 10, 0.62);
-        backdrop-filter: blur(18px);
-      }
-
-      .signal strong {
-        display: block;
-        color: #ffffff;
-        font-size: 1.15rem;
-        line-height: 1;
-      }
-
-      .signal span {
-        display: block;
-        margin-top: 8px;
-        color: rgba(245, 247, 251, 0.58);
-        font-size: 0.76rem;
-        letter-spacing: 0.08em;
-        text-transform: uppercase;
       }
 
       .status span {
@@ -133,52 +101,83 @@
         backdrop-filter: blur(16px);
       }
 
-      @media (max-width: 700px) {
+      .regions {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        width: min(100%, 590px);
+        margin-top: 36px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .regions div {
+        padding: 18px 16px;
+        background: rgba(2, 4, 10, 0.62);
+        backdrop-filter: blur(18px);
+      }
+
+      .regions strong {
+        display: block;
+        color: #ffffff;
+        font-size: 1.08rem;
+      }
+
+      .regions span {
+        display: block;
+        margin-top: 8px;
+        color: rgba(247, 251, 255, 0.58);
+        font-size: 0.74rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      @media (max-width: 760px) {
         body {
           overflow: auto;
         }
 
         .overlay {
-          align-items: center;
+          align-items: flex-end;
           background:
-            linear-gradient(180deg, rgba(3, 5, 10, 0.25), rgba(3, 5, 10, 0.94)),
-            radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.18), transparent 44%);
+            linear-gradient(180deg, rgba(2, 4, 10, 0.12), rgba(2, 4, 10, 0.96)),
+            radial-gradient(circle at 58% 34%, rgba(42, 220, 255, 0.16), transparent 42%);
         }
 
         .content {
           padding: 28px;
         }
 
-        .signal {
+        .regions {
           grid-template-columns: 1fr;
         }
       }
     </style>
   </head>
   <body>
-    <canvas id="scene" aria-label="抽象的な3D空間"></canvas>
+    <canvas id="scene" aria-label="宇宙空間に浮かぶ3D地球と顧客地域ネットワーク"></canvas>
     <main class="overlay">
       <section class="content">
-        <p class="eyebrow">AIC1 Experimental Website</p>
-        <h1>Enter the Neural Space</h1>
-        <p>発光するコア、流れる星層、奥行きのあるグリッドで構成した、GitHub Pages向けの3Dトップページです。</p>
+        <p class="eyebrow">AIC1 Global Presence</p>
+        <h1>Orbiting Customer Regions</h1>
+        <p>宇宙空間に浮かぶ地球上で、顧客がいる地域をピンではなく光の密度、地表ハロー、軌道アークとして表現しています。</p>
         <div class="status" aria-label="サイトの特徴">
-          <span>Live WebGL</span>
-          <span>Pointer Reactive</span>
-          <span>Pages Ready</span>
+          <span>Realtime Earth</span>
+          <span>Customer Glow Map</span>
+          <span>Orbital Links</span>
         </div>
-        <div class="signal" aria-label="ビジュアル情報">
+        <div class="regions" aria-label="顧客地域">
           <div>
-            <strong>3D</strong>
-            <span>Realtime Scene</span>
+            <strong>Tokyo</strong>
+            <span>Primary Hub</span>
           </div>
           <div>
-            <strong>3600+</strong>
-            <span>Light Particles</span>
+            <strong>North America</strong>
+            <span>Active Region</span>
           </div>
           <div>
-            <strong>∞</strong>
-            <span>Motion Loop</span>
+            <strong>Europe</strong>
+            <span>Growing Network</span>
           </div>
         </div>
       </section>
@@ -189,110 +188,223 @@
 
       const canvas = document.querySelector("#scene");
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x03050a, 0.032);
+      scene.fog = new THREE.FogExp2(0x02040a, 0.026);
 
-      const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 160);
-      camera.position.set(0, 1.6, 9);
+      const camera = new THREE.PerspectiveCamera(58, window.innerWidth / window.innerHeight, 0.1, 180);
+      camera.position.set(0.2, 1.45, 9.2);
 
-      const renderer = new THREE.WebGLRenderer({
-        canvas,
-        antialias: true,
-        alpha: false
-      });
+      const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: false });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x03050a, 1);
+      renderer.setClearColor(0x02040a, 1);
       renderer.outputColorSpace = THREE.SRGBColorSpace;
 
-      const ambient = new THREE.AmbientLight(0x7aa7ff, 0.9);
-      scene.add(ambient);
+      scene.add(new THREE.AmbientLight(0x6d8dff, 0.45));
 
-      const keyLight = new THREE.PointLight(0x00e5ff, 9, 48);
-      keyLight.position.set(5, 4, 4);
-      scene.add(keyLight);
+      const sunLight = new THREE.DirectionalLight(0xffffff, 3.6);
+      sunLight.position.set(6, 3.2, 5);
+      scene.add(sunLight);
 
-      const magentaLight = new THREE.PointLight(0xff4fd8, 5, 40);
-      magentaLight.position.set(-6, -2, 3);
-      scene.add(magentaLight);
+      const rimLight = new THREE.PointLight(0x58ecff, 8, 36);
+      rimLight.position.set(-5, 1.2, -1);
+      scene.add(rimLight);
 
-      const coreGeometry = new THREE.IcosahedronGeometry(2.1, 4);
-      const coreMaterial = new THREE.MeshStandardMaterial({
-        color: 0xb8fcff,
-        metalness: 0.82,
-        roughness: 0.11,
-        emissive: 0x005f73,
-        emissiveIntensity: 0.48,
-        wireframe: true
-      });
-      const core = new THREE.Mesh(coreGeometry, coreMaterial);
-      core.position.set(2.8, 0.2, -1.2);
-      scene.add(core);
+      const earthGroup = new THREE.Group();
+      earthGroup.position.set(2.9, 0.05, -0.9);
+      scene.add(earthGroup);
 
-      const glow = new THREE.Mesh(
-        new THREE.IcosahedronGeometry(2.4, 2),
-        new THREE.MeshBasicMaterial({
-          color: 0x00e5ff,
-          transparent: true,
-          opacity: 0.08,
-          blending: THREE.AdditiveBlending
+      const earth = new THREE.Mesh(
+        new THREE.SphereGeometry(2.35, 96, 96),
+        new THREE.MeshStandardMaterial({
+          color: 0x102c5e,
+          metalness: 0.12,
+          roughness: 0.58,
+          emissive: 0x031a3a,
+          emissiveIntensity: 0.62
         })
       );
-      glow.position.copy(core.position);
-      scene.add(glow);
+      earthGroup.add(earth);
 
-      const ringGroup = new THREE.Group();
-      scene.add(ringGroup);
+      const atmosphere = new THREE.Mesh(
+        new THREE.SphereGeometry(2.47, 96, 96),
+        new THREE.MeshBasicMaterial({
+          color: 0x5ee7ff,
+          transparent: true,
+          opacity: 0.13,
+          blending: THREE.AdditiveBlending,
+          side: THREE.BackSide
+        })
+      );
+      earthGroup.add(atmosphere);
 
-      const ringMaterial = new THREE.MeshBasicMaterial({
-        color: 0x66f6ff,
+      const cloudShell = new THREE.Mesh(
+        new THREE.SphereGeometry(2.39, 80, 80),
+        new THREE.MeshBasicMaterial({
+          color: 0xffffff,
+          transparent: true,
+          opacity: 0.08,
+          wireframe: true
+        })
+      );
+      earthGroup.add(cloudShell);
+
+      const latitudeMaterial = new THREE.LineBasicMaterial({
+        color: 0x6defff,
         transparent: true,
-        opacity: 0.38
+        opacity: 0.16
       });
 
-      for (let i = 0; i < 5; i += 1) {
-        const ring = new THREE.Mesh(
-          new THREE.TorusGeometry(3.1 + i * 0.28, 0.008, 16, 180),
-          ringMaterial.clone()
-        );
-        ring.rotation.x = Math.PI / 2.2 + i * 0.18;
-        ring.rotation.y = i * 0.38;
-        ring.material.opacity = 0.16 + i * 0.045;
-        ringGroup.add(ring);
+      for (let lat = -60; lat <= 60; lat += 30) {
+        const radius = Math.cos(THREE.MathUtils.degToRad(lat)) * 2.37;
+        const y = Math.sin(THREE.MathUtils.degToRad(lat)) * 2.37;
+        const points = [];
+        for (let i = 0; i <= 160; i += 1) {
+          const angle = (i / 160) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(angle) * radius, y, Math.sin(angle) * radius));
+        }
+        earthGroup.add(new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), latitudeMaterial));
       }
 
-      ringGroup.position.copy(core.position);
+      const landMasses = [
+        [-100, 45, 0.62, 0.28], [-75, 20, 0.45, 0.25], [-60, -15, 0.38, 0.42],
+        [15, 52, 0.42, 0.18], [20, 8, 0.48, 0.44], [78, 25, 0.78, 0.32],
+        [105, 35, 0.7, 0.24], [135, -25, 0.42, 0.22], [140, 38, 0.24, 0.15]
+      ];
 
-      const particleCount = 3600;
-      const particlePositions = new Float32Array(particleCount * 3);
-      const particleColors = new Float32Array(particleCount * 3);
-      const colorA = new THREE.Color(0x66f6ff);
-      const colorB = new THREE.Color(0xff358a);
-      const colorC = new THREE.Color(0xa78bfa);
+      function latLonToVector3(lat, lon, radius) {
+        const phi = THREE.MathUtils.degToRad(90 - lat);
+        const theta = THREE.MathUtils.degToRad(lon + 180);
+        return new THREE.Vector3(
+          -radius * Math.sin(phi) * Math.cos(theta),
+          radius * Math.cos(phi),
+          radius * Math.sin(phi) * Math.sin(theta)
+        );
+      }
 
-      for (let i = 0; i < particleCount; i += 1) {
-        const radius = 7 + Math.random() * 55;
+      const landPositions = [];
+      const landColors = [];
+      const landColor = new THREE.Color(0x49d69e);
+
+      landMasses.forEach(([lon, lat, width, height]) => {
+        for (let i = 0; i < 180; i += 1) {
+          const jitterLon = lon + THREE.MathUtils.randFloatSpread(width * 38);
+          const jitterLat = lat + THREE.MathUtils.randFloatSpread(height * 32);
+          const pos = latLonToVector3(jitterLat, jitterLon, 2.372);
+          landPositions.push(pos.x, pos.y, pos.z);
+          landColors.push(landColor.r, landColor.g, landColor.b);
+        }
+      });
+
+      const landGeometry = new THREE.BufferGeometry();
+      landGeometry.setAttribute("position", new THREE.Float32BufferAttribute(landPositions, 3));
+      landGeometry.setAttribute("color", new THREE.Float32BufferAttribute(landColors, 3));
+      earthGroup.add(new THREE.Points(
+        landGeometry,
+        new THREE.PointsMaterial({
+          size: 0.024,
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.78,
+          depthWrite: false
+        })
+      ));
+
+      const customerRegions = [
+        { name: "Tokyo", lat: 35.7, lon: 139.7, color: 0x7af7ff },
+        { name: "San Francisco", lat: 37.8, lon: -122.4, color: 0xff5fad },
+        { name: "New York", lat: 40.7, lon: -74.0, color: 0xffd166 },
+        { name: "London", lat: 51.5, lon: -0.1, color: 0xa78bfa },
+        { name: "Singapore", lat: 1.3, lon: 103.8, color: 0x66ffb2 },
+        { name: "Sydney", lat: -33.9, lon: 151.2, color: 0x7af7ff }
+      ];
+
+      const regionGroup = new THREE.Group();
+      earthGroup.add(regionGroup);
+
+      customerRegions.forEach((region) => {
+        const color = new THREE.Color(region.color);
+        const center = latLonToVector3(region.lat, region.lon, 2.43);
+
+        const halo = new THREE.Mesh(
+          new THREE.RingGeometry(0.09, 0.31, 48),
+          new THREE.MeshBasicMaterial({
+            color,
+            transparent: true,
+            opacity: 0.42,
+            blending: THREE.AdditiveBlending,
+            side: THREE.DoubleSide
+          })
+        );
+        halo.position.copy(center);
+        halo.lookAt(new THREE.Vector3(0, 0, 0));
+        halo.rotateX(Math.PI / 2);
+        halo.userData.baseScale = 0.85 + Math.random() * 0.3;
+        regionGroup.add(halo);
+
+        const glow = new THREE.Mesh(
+          new THREE.SphereGeometry(0.035, 18, 18),
+          new THREE.MeshBasicMaterial({
+            color,
+            transparent: true,
+            opacity: 0.95,
+            blending: THREE.AdditiveBlending
+          })
+        );
+        glow.position.copy(center.clone().multiplyScalar(1.012));
+        glow.userData.phase = Math.random() * Math.PI * 2;
+        regionGroup.add(glow);
+      });
+
+      function makeArc(start, end, color) {
+        const startPos = latLonToVector3(start.lat, start.lon, 2.52);
+        const endPos = latLonToVector3(end.lat, end.lon, 2.52);
+        const mid = startPos.clone().add(endPos).normalize().multiplyScalar(3.35);
+        const curve = new THREE.QuadraticBezierCurve3(startPos, mid, endPos);
+        const points = curve.getPoints(96);
+        const geometry = new THREE.BufferGeometry().setFromPoints(points);
+        return new THREE.Line(
+          geometry,
+          new THREE.LineBasicMaterial({
+            color,
+            transparent: true,
+            opacity: 0.56,
+            blending: THREE.AdditiveBlending
+          })
+        );
+      }
+
+      const arcGroup = new THREE.Group();
+      earthGroup.add(arcGroup);
+      const hub = customerRegions[0];
+      customerRegions.slice(1).forEach((region, index) => {
+        arcGroup.add(makeArc(hub, region, index % 2 === 0 ? 0x7af7ff : 0xff5fad));
+      });
+
+      const starsGeometry = new THREE.BufferGeometry();
+      const starPositions = [];
+      const starColors = [];
+      const starA = new THREE.Color(0xffffff);
+      const starB = new THREE.Color(0x79e8ff);
+
+      for (let i = 0; i < 5200; i += 1) {
+        const radius = 12 + Math.random() * 70;
         const theta = Math.random() * Math.PI * 2;
         const phi = Math.acos(THREE.MathUtils.randFloatSpread(2));
-        const index = i * 3;
-
-        particlePositions[index] = Math.sin(phi) * Math.cos(theta) * radius;
-        particlePositions[index + 1] = Math.cos(phi) * radius * 0.62;
-        particlePositions[index + 2] = Math.sin(phi) * Math.sin(theta) * radius - 20;
-
-        const mixed = colorA.clone().lerp(i % 3 === 0 ? colorB : colorC, Math.random() * 0.7);
-        particleColors[index] = mixed.r;
-        particleColors[index + 1] = mixed.g;
-        particleColors[index + 2] = mixed.b;
+        starPositions.push(
+          Math.sin(phi) * Math.cos(theta) * radius,
+          Math.cos(phi) * radius * 0.72,
+          Math.sin(phi) * Math.sin(theta) * radius - 28
+        );
+        const color = starA.clone().lerp(starB, Math.random() * 0.55);
+        starColors.push(color.r, color.g, color.b);
       }
 
-      const particleGeometry = new THREE.BufferGeometry();
-      particleGeometry.setAttribute("position", new THREE.BufferAttribute(particlePositions, 3));
-      particleGeometry.setAttribute("color", new THREE.BufferAttribute(particleColors, 3));
-
-      const particles = new THREE.Points(
-        particleGeometry,
+      starsGeometry.setAttribute("position", new THREE.Float32BufferAttribute(starPositions, 3));
+      starsGeometry.setAttribute("color", new THREE.Float32BufferAttribute(starColors, 3));
+      const stars = new THREE.Points(
+        starsGeometry,
         new THREE.PointsMaterial({
-          size: 0.05,
+          size: 0.043,
           vertexColors: true,
           transparent: true,
           opacity: 0.9,
@@ -300,46 +412,31 @@
           blending: THREE.AdditiveBlending
         })
       );
-      scene.add(particles);
+      scene.add(stars);
 
-      const grid = new THREE.GridHelper(44, 44, 0x00e5ff, 0x183349);
-      grid.position.set(0, -3.1, -8);
-      grid.material.transparent = true;
-      grid.material.opacity = 0.24;
-      scene.add(grid);
-
-      const beamGroup = new THREE.Group();
-      const beamMaterial = new THREE.MeshBasicMaterial({
-        color: 0xff358a,
+      const orbitGroup = new THREE.Group();
+      earthGroup.add(orbitGroup);
+      const orbitMaterial = new THREE.LineBasicMaterial({
+        color: 0x7af7ff,
         transparent: true,
-        opacity: 0.32,
+        opacity: 0.26,
         blending: THREE.AdditiveBlending
       });
 
-      for (let i = 0; i < 18; i += 1) {
-        const beam = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.018, 9), beamMaterial.clone());
-        beam.position.set(THREE.MathUtils.randFloatSpread(18), THREE.MathUtils.randFloatSpread(8), -8 - Math.random() * 18);
-        beam.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
-        beam.material.opacity = 0.12 + Math.random() * 0.22;
-        beamGroup.add(beam);
+      for (let i = 0; i < 3; i += 1) {
+        const points = [];
+        const radius = 3.05 + i * 0.22;
+        for (let j = 0; j <= 180; j += 1) {
+          const angle = (j / 180) * Math.PI * 2;
+          points.push(new THREE.Vector3(Math.cos(angle) * radius, 0, Math.sin(angle) * radius));
+        }
+        const orbit = new THREE.Line(new THREE.BufferGeometry().setFromPoints(points), orbitMaterial.clone());
+        orbit.rotation.x = Math.PI / 2.1 + i * 0.23;
+        orbit.rotation.y = i * 0.48;
+        orbitGroup.add(orbit);
       }
 
-      scene.add(beamGroup);
-
-      const tunnel = new THREE.Mesh(
-        new THREE.TorusKnotGeometry(4.7, 0.018, 360, 12, 2, 5),
-        new THREE.MeshBasicMaterial({
-          color: 0x4f8cff,
-          transparent: true,
-          opacity: 0.22
-        })
-      );
-      tunnel.position.set(1.2, 0, -6);
-      tunnel.rotation.x = 0.8;
-      scene.add(tunnel);
-
       const pointer = new THREE.Vector2(0, 0);
-
       window.addEventListener("pointermove", (event) => {
         pointer.x = (event.clientX / window.innerWidth - 0.5) * 2;
         pointer.y = (event.clientY / window.innerHeight - 0.5) * 2;
@@ -357,37 +454,33 @@
       function animate() {
         const elapsed = clock.getElapsedTime();
 
-        particles.rotation.y = elapsed * 0.025;
-        particles.rotation.x = Math.sin(elapsed * 0.18) * 0.08;
+        earthGroup.rotation.y = elapsed * 0.085 - 0.75;
+        earth.rotation.y = elapsed * 0.025;
+        cloudShell.rotation.y = elapsed * 0.045;
+        atmosphere.scale.setScalar(1 + Math.sin(elapsed * 1.5) * 0.012);
 
-        core.rotation.x = elapsed * 0.32;
-        core.rotation.y = elapsed * 0.46;
-        core.scale.setScalar(1 + Math.sin(elapsed * 1.8) * 0.035);
-
-        glow.rotation.copy(core.rotation);
-        glow.scale.setScalar(1 + Math.sin(elapsed * 2.2) * 0.08);
-
-        ringGroup.rotation.x = elapsed * 0.12;
-        ringGroup.rotation.z = elapsed * 0.18;
-
-        tunnel.rotation.y = elapsed * 0.18;
-        tunnel.rotation.z = elapsed * 0.08;
-
-        grid.position.z = -8 + (elapsed * 1.2) % 2;
-        beamGroup.rotation.y = elapsed * 0.04;
-        beamGroup.children.forEach((beam, index) => {
-          beam.position.z += 0.045 + index * 0.0008;
-          if (beam.position.z > 8) {
-            beam.position.z = -26;
+        regionGroup.children.forEach((item, index) => {
+          const pulse = 1 + Math.sin(elapsed * 2.4 + index * 0.7) * 0.18;
+          item.scale.setScalar((item.userData.baseScale || 1) * pulse);
+          if (item.material) {
+            item.material.opacity = item.geometry.type === "RingGeometry" ? 0.32 + pulse * 0.08 : 0.62 + pulse * 0.18;
           }
         });
 
-        keyLight.position.x = Math.cos(elapsed * 0.6) * 6;
-        keyLight.position.z = Math.sin(elapsed * 0.6) * 6;
+        arcGroup.children.forEach((arc, index) => {
+          arc.material.opacity = 0.32 + Math.sin(elapsed * 1.8 + index) * 0.12;
+        });
 
-        camera.position.x += (pointer.x * 1.2 - camera.position.x) * 0.035;
-        camera.position.y += (-pointer.y * 0.8 + 1.6 - camera.position.y) * 0.035;
-        camera.lookAt(1.1, 0, -3);
+        orbitGroup.rotation.z = elapsed * 0.12;
+        orbitGroup.rotation.y = elapsed * 0.05;
+        stars.rotation.y = elapsed * 0.012;
+
+        rimLight.position.x = Math.cos(elapsed * 0.5) * 5.5;
+        rimLight.position.z = Math.sin(elapsed * 0.5) * 5.5;
+
+        camera.position.x += (pointer.x * 0.85 - camera.position.x) * 0.035;
+        camera.position.y += (-pointer.y * 0.55 + 1.45 - camera.position.y) * 0.035;
+        camera.lookAt(1.2, 0, -1.2);
 
         renderer.render(scene, camera);
         requestAnimationFrame(animate);
