@@ -3,12 +3,12 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Immersive 3D Website</title>
+    <title>AIC1 | 3D Portfolio</title>
     <style>
       :root {
         font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         color: #f5f7fb;
-        background: #05070d;
+        background: #03050a;
       }
 
       * {
@@ -19,7 +19,7 @@
         margin: 0;
         min-height: 100vh;
         overflow: hidden;
-        background: #05070d;
+        background: #03050a;
       }
 
       canvas {
@@ -32,21 +32,35 @@
         position: fixed;
         inset: 0;
         display: flex;
-        align-items: flex-end;
+        align-items: center;
         pointer-events: none;
         background:
-          radial-gradient(circle at 70% 35%, rgba(32, 201, 151, 0.12), transparent 32%),
-          linear-gradient(90deg, rgba(5, 7, 13, 0.9), rgba(5, 7, 13, 0.24) 52%, rgba(5, 7, 13, 0.7));
+          linear-gradient(90deg, rgba(3, 5, 10, 0.94), rgba(3, 5, 10, 0.38) 48%, rgba(3, 5, 10, 0.18)),
+          radial-gradient(circle at 70% 48%, rgba(0, 229, 255, 0.15), transparent 34%),
+          radial-gradient(circle at 28% 78%, rgba(255, 53, 138, 0.13), transparent 28%);
+      }
+
+      .overlay::before {
+        position: absolute;
+        inset: 0;
+        content: "";
+        opacity: 0.24;
+        background-image:
+          linear-gradient(rgba(255, 255, 255, 0.08) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(255, 255, 255, 0.08) 1px, transparent 1px);
+        background-size: 68px 68px;
+        mask-image: linear-gradient(90deg, #000, transparent 70%);
       }
 
       .content {
-        width: min(100%, 980px);
+        position: relative;
+        width: min(100%, 1040px);
         padding: clamp(32px, 7vw, 88px);
       }
 
       .eyebrow {
         margin: 0 0 18px;
-        color: #7df9d4;
+        color: #66f6ff;
         font-size: 0.82rem;
         font-weight: 700;
         letter-spacing: 0.14em;
@@ -56,15 +70,16 @@
       h1 {
         max-width: 780px;
         margin: 0;
-        font-size: clamp(2.6rem, 8vw, 6.8rem);
+        font-size: clamp(3rem, 8.6vw, 7.6rem);
         line-height: 0.95;
         letter-spacing: 0;
+        text-shadow: 0 0 36px rgba(102, 246, 255, 0.22);
       }
 
       p {
-        max-width: 560px;
+        max-width: 620px;
         margin: 22px 0 0;
-        color: rgba(245, 247, 251, 0.78);
+        color: rgba(245, 247, 251, 0.8);
         font-size: clamp(1rem, 2.4vw, 1.25rem);
         line-height: 1.8;
       }
@@ -76,6 +91,38 @@
         margin-top: 28px;
         color: rgba(245, 247, 251, 0.72);
         font-size: 0.9rem;
+      }
+
+      .signal {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        gap: 1px;
+        width: min(100%, 560px);
+        margin-top: 34px;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      .signal div {
+        padding: 18px 16px;
+        background: rgba(3, 5, 10, 0.62);
+        backdrop-filter: blur(18px);
+      }
+
+      .signal strong {
+        display: block;
+        color: #ffffff;
+        font-size: 1.15rem;
+        line-height: 1;
+      }
+
+      .signal span {
+        display: block;
+        margin-top: 8px;
+        color: rgba(245, 247, 251, 0.58);
+        font-size: 0.76rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
       }
 
       .status span {
@@ -94,12 +141,16 @@
         .overlay {
           align-items: center;
           background:
-            linear-gradient(180deg, rgba(5, 7, 13, 0.4), rgba(5, 7, 13, 0.9)),
-            radial-gradient(circle at 50% 30%, rgba(32, 201, 151, 0.16), transparent 44%);
+            linear-gradient(180deg, rgba(3, 5, 10, 0.25), rgba(3, 5, 10, 0.94)),
+            radial-gradient(circle at 50% 30%, rgba(0, 229, 255, 0.18), transparent 44%);
         }
 
         .content {
           padding: 28px;
+        }
+
+        .signal {
+          grid-template-columns: 1fr;
         }
       }
     </style>
@@ -108,13 +159,27 @@
     <canvas id="scene" aria-label="抽象的な3D空間"></canvas>
     <main class="overlay">
       <section class="content">
-        <p class="eyebrow">Personal Website</p>
-        <h1>Into the Digital Horizon</h1>
-        <p>光の粒子と立体的な軌道が動き続ける、GitHub Pages向けの没入型3Dトップページです。</p>
+        <p class="eyebrow">AIC1 Experimental Website</p>
+        <h1>Enter the Neural Space</h1>
+        <p>発光するコア、流れる星層、奥行きのあるグリッドで構成した、GitHub Pages向けの3Dトップページです。</p>
         <div class="status" aria-label="サイトの特徴">
-          <span>Realtime 3D</span>
-          <span>Responsive</span>
-          <span>GitHub Pages Ready</span>
+          <span>Live WebGL</span>
+          <span>Pointer Reactive</span>
+          <span>Pages Ready</span>
+        </div>
+        <div class="signal" aria-label="ビジュアル情報">
+          <div>
+            <strong>3D</strong>
+            <span>Realtime Scene</span>
+          </div>
+          <div>
+            <strong>3600+</strong>
+            <span>Light Particles</span>
+          </div>
+          <div>
+            <strong>∞</strong>
+            <span>Motion Loop</span>
+          </div>
         </div>
       </section>
     </main>
@@ -124,7 +189,7 @@
 
       const canvas = document.querySelector("#scene");
       const scene = new THREE.Scene();
-      scene.fog = new THREE.FogExp2(0x05070d, 0.035);
+      scene.fog = new THREE.FogExp2(0x03050a, 0.032);
 
       const camera = new THREE.PerspectiveCamera(62, window.innerWidth / window.innerHeight, 0.1, 160);
       camera.position.set(0, 1.6, 9);
@@ -136,12 +201,13 @@
       });
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
       renderer.setSize(window.innerWidth, window.innerHeight);
-      renderer.setClearColor(0x05070d, 1);
+      renderer.setClearColor(0x03050a, 1);
+      renderer.outputColorSpace = THREE.SRGBColorSpace;
 
       const ambient = new THREE.AmbientLight(0x7aa7ff, 0.9);
       scene.add(ambient);
 
-      const keyLight = new THREE.PointLight(0x20c997, 8, 45);
+      const keyLight = new THREE.PointLight(0x00e5ff, 9, 48);
       keyLight.position.set(5, 4, 4);
       scene.add(keyLight);
 
@@ -149,24 +215,36 @@
       magentaLight.position.set(-6, -2, 3);
       scene.add(magentaLight);
 
-      const coreGeometry = new THREE.IcosahedronGeometry(2.1, 3);
+      const coreGeometry = new THREE.IcosahedronGeometry(2.1, 4);
       const coreMaterial = new THREE.MeshStandardMaterial({
-        color: 0x93fff0,
-        metalness: 0.72,
-        roughness: 0.18,
-        emissive: 0x0d5f73,
-        emissiveIntensity: 0.38,
+        color: 0xb8fcff,
+        metalness: 0.82,
+        roughness: 0.11,
+        emissive: 0x005f73,
+        emissiveIntensity: 0.48,
         wireframe: true
       });
       const core = new THREE.Mesh(coreGeometry, coreMaterial);
       core.position.set(2.8, 0.2, -1.2);
       scene.add(core);
 
+      const glow = new THREE.Mesh(
+        new THREE.IcosahedronGeometry(2.4, 2),
+        new THREE.MeshBasicMaterial({
+          color: 0x00e5ff,
+          transparent: true,
+          opacity: 0.08,
+          blending: THREE.AdditiveBlending
+        })
+      );
+      glow.position.copy(core.position);
+      scene.add(glow);
+
       const ringGroup = new THREE.Group();
       scene.add(ringGroup);
 
       const ringMaterial = new THREE.MeshBasicMaterial({
-        color: 0x7df9d4,
+        color: 0x66f6ff,
         transparent: true,
         opacity: 0.38
       });
@@ -184,12 +262,12 @@
 
       ringGroup.position.copy(core.position);
 
-      const particleCount = 2800;
+      const particleCount = 3600;
       const particlePositions = new Float32Array(particleCount * 3);
       const particleColors = new Float32Array(particleCount * 3);
-      const colorA = new THREE.Color(0x7df9d4);
-      const colorB = new THREE.Color(0xff4fd8);
-      const colorC = new THREE.Color(0x4f8cff);
+      const colorA = new THREE.Color(0x66f6ff);
+      const colorB = new THREE.Color(0xff358a);
+      const colorC = new THREE.Color(0xa78bfa);
 
       for (let i = 0; i < particleCount; i += 1) {
         const radius = 7 + Math.random() * 55;
@@ -214,7 +292,7 @@
       const particles = new THREE.Points(
         particleGeometry,
         new THREE.PointsMaterial({
-          size: 0.045,
+          size: 0.05,
           vertexColors: true,
           transparent: true,
           opacity: 0.9,
@@ -223,6 +301,30 @@
         })
       );
       scene.add(particles);
+
+      const grid = new THREE.GridHelper(44, 44, 0x00e5ff, 0x183349);
+      grid.position.set(0, -3.1, -8);
+      grid.material.transparent = true;
+      grid.material.opacity = 0.24;
+      scene.add(grid);
+
+      const beamGroup = new THREE.Group();
+      const beamMaterial = new THREE.MeshBasicMaterial({
+        color: 0xff358a,
+        transparent: true,
+        opacity: 0.32,
+        blending: THREE.AdditiveBlending
+      });
+
+      for (let i = 0; i < 18; i += 1) {
+        const beam = new THREE.Mesh(new THREE.BoxGeometry(0.018, 0.018, 9), beamMaterial.clone());
+        beam.position.set(THREE.MathUtils.randFloatSpread(18), THREE.MathUtils.randFloatSpread(8), -8 - Math.random() * 18);
+        beam.rotation.set(Math.random() * Math.PI, Math.random() * Math.PI, Math.random() * Math.PI);
+        beam.material.opacity = 0.12 + Math.random() * 0.22;
+        beamGroup.add(beam);
+      }
+
+      scene.add(beamGroup);
 
       const tunnel = new THREE.Mesh(
         new THREE.TorusKnotGeometry(4.7, 0.018, 360, 12, 2, 5),
@@ -262,11 +364,23 @@
         core.rotation.y = elapsed * 0.46;
         core.scale.setScalar(1 + Math.sin(elapsed * 1.8) * 0.035);
 
+        glow.rotation.copy(core.rotation);
+        glow.scale.setScalar(1 + Math.sin(elapsed * 2.2) * 0.08);
+
         ringGroup.rotation.x = elapsed * 0.12;
         ringGroup.rotation.z = elapsed * 0.18;
 
         tunnel.rotation.y = elapsed * 0.18;
         tunnel.rotation.z = elapsed * 0.08;
+
+        grid.position.z = -8 + (elapsed * 1.2) % 2;
+        beamGroup.rotation.y = elapsed * 0.04;
+        beamGroup.children.forEach((beam, index) => {
+          beam.position.z += 0.045 + index * 0.0008;
+          if (beam.position.z > 8) {
+            beam.position.z = -26;
+          }
+        });
 
         keyLight.position.x = Math.cos(elapsed * 0.6) * 6;
         keyLight.position.z = Math.sin(elapsed * 0.6) * 6;
