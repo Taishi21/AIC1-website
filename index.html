@@ -3,1210 +3,147 @@
   <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Keio TextCycle | 慶應生の教科書フリマ</title>
-    <style>
-      :root {
-        color-scheme: light;
-        font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        color: #1f2933;
-        background: #f4f7fb;
-        --ink: #1f2933;
-        --muted: #627386;
-        --line: #d9e2ec;
-        --panel: #ffffff;
-        --accent: #003b71;
-        --accent-dark: #002b52;
-        --warn: #b45309;
-        --blue: #2563eb;
-      }
-
-      * {
-        box-sizing: border-box;
-      }
-
-      body {
-        margin: 0;
-        min-height: 100vh;
-        background:
-          linear-gradient(180deg, rgba(0, 59, 113, 0.10), transparent 260px),
-          #f4f7fb;
-      }
-
-      button,
-      input,
-      select,
-      textarea {
-        font: inherit;
-      }
-
-      button {
-        border: 0;
-        cursor: pointer;
-      }
-
-      .app {
-        min-height: 100vh;
-      }
-
-      header {
-        position: sticky;
-        top: 0;
-        z-index: 10;
-        border-bottom: 1px solid rgba(217, 226, 236, 0.9);
-        background: rgba(255, 255, 255, 0.86);
-        backdrop-filter: blur(18px);
-      }
-
-      .topbar {
-        display: flex;
-        align-items: center;
-        gap: 18px;
-        width: min(1180px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 14px 0;
-      }
-
-      .brand {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        min-width: max-content;
-        font-weight: 800;
-        letter-spacing: 0;
-      }
-
-      .brand-mark {
-        display: grid;
-        place-items: center;
-        width: 36px;
-        height: 36px;
-        border-radius: 8px;
-        color: #ffffff;
-        background: linear-gradient(135deg, #003b71, #2f80ed);
-        box-shadow: 0 12px 28px rgba(0, 59, 113, 0.22);
-      }
-
-      .search {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-        flex: 1;
-        min-width: 180px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 10px 12px;
-        background: #ffffff;
-      }
-
-      .search svg {
-        flex: 0 0 auto;
-        color: var(--muted);
-      }
-
-      .search input {
-        width: 100%;
-        border: 0;
-        outline: 0;
-        color: var(--ink);
-      }
-
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .ghost-button,
-      .primary-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        min-height: 40px;
-        border-radius: 8px;
-        padding: 0 14px;
-        font-weight: 700;
-        white-space: nowrap;
-      }
-
-      .ghost-button {
-        border: 1px solid var(--line);
-        color: var(--ink);
-        background: #ffffff;
-      }
-
-      .primary-button {
-        color: #ffffff;
-        background: var(--accent);
-      }
-
-      .primary-button:hover {
-        background: var(--accent-dark);
-      }
-
-      main {
-        width: min(1180px, calc(100% - 32px));
-        margin: 0 auto;
-        padding: 26px 0 46px;
-      }
-
-      .summary {
-        display: grid;
-        grid-template-columns: minmax(0, 1.2fr) repeat(3, minmax(140px, 0.28fr));
-        gap: 14px;
-        align-items: stretch;
-      }
-
-      .summary-panel,
-      .metric,
-      .filters,
-      .listing,
-      .sell-panel,
-      .checkout-panel {
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        background: var(--panel);
-        box-shadow: 0 16px 40px rgba(31, 41, 51, 0.06);
-      }
-
-      .summary-panel {
-        padding: 22px;
-      }
-
-      .summary-panel h1 {
-        margin: 0;
-        max-width: 640px;
-        font-size: clamp(2rem, 4.8vw, 4.2rem);
-        line-height: 1;
-        letter-spacing: 0;
-      }
-
-      .summary-panel p {
-        max-width: 690px;
-        margin: 16px 0 0;
-        color: var(--muted);
-        font-size: 1rem;
-        line-height: 1.7;
-      }
-
-      .quick-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 10px;
-        margin-top: 20px;
-      }
-
-      .metric {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 150px;
-        padding: 18px;
-      }
-
-      .metric strong {
-        font-size: 1.8rem;
-        line-height: 1;
-      }
-
-      .metric span {
-        color: var(--muted);
-        font-size: 0.88rem;
-        line-height: 1.5;
-      }
-
-      .layout {
-        display: grid;
-        grid-template-columns: 260px minmax(0, 1fr) 300px;
-        gap: 16px;
-        margin-top: 16px;
-      }
-
-      .filters,
-      .sell-panel,
-      .checkout-panel {
-        padding: 18px;
-      }
-
-      .section-title {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 14px;
-      }
-
-      .section-title h2 {
-        margin: 0;
-        font-size: 1rem;
-      }
-
-      .section-title span {
-        color: var(--muted);
-        font-size: 0.82rem;
-      }
-
-      .field {
-        display: grid;
-        gap: 7px;
-        margin-top: 14px;
-      }
-
-      .field label {
-        color: #344054;
-        font-size: 0.84rem;
-        font-weight: 700;
-      }
-
-      .field input,
-      .field select,
-      .field textarea {
-        width: 100%;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 10px 11px;
-        outline: 0;
-        color: var(--ink);
-        background: #ffffff;
-      }
-
-      .field textarea {
-        min-height: 92px;
-        resize: vertical;
-      }
-
-      .field input:focus,
-      .field select:focus,
-      .field textarea:focus {
-        border-color: rgba(0, 59, 113, 0.62);
-        box-shadow: 0 0 0 3px rgba(0, 59, 113, 0.12);
-      }
-
-      .toggle-row {
-        display: flex;
-        align-items: center;
-        gap: 9px;
-        margin-top: 12px;
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      .toggle-row input {
-        width: 16px;
-        height: 16px;
-        accent-color: var(--accent);
-      }
-
-      .market {
-        min-width: 0;
-      }
-
-      .market-toolbar {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: 12px;
-        margin-bottom: 12px;
-      }
-
-      .tabs {
-        display: inline-flex;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 3px;
-        background: #ffffff;
-      }
-
-      .tab {
-        border-radius: 6px;
-        padding: 8px 12px;
-        color: var(--muted);
-        background: transparent;
-        font-weight: 700;
-      }
-
-      .tab.active {
-        color: #ffffff;
-        background: var(--ink);
-      }
-
-      .sort {
-        min-width: 170px;
-        border: 1px solid var(--line);
-        border-radius: 8px;
-        padding: 9px 10px;
-        background: #ffffff;
-      }
-
-      .listings {
-        display: grid;
-        gap: 12px;
-      }
-
-      .listing {
-        display: grid;
-        grid-template-columns: 86px minmax(0, 1fr) auto;
-        gap: 16px;
-        padding: 14px;
-      }
-
-      .book-cover {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
-        min-height: 124px;
-        border-radius: 6px;
-        padding: 12px 10px;
-        color: #ffffff;
-        overflow: hidden;
-        box-shadow: inset -12px 0 0 rgba(0, 0, 0, 0.14);
-      }
-
-      .book-cover::before {
-        position: absolute;
-        inset: 0;
-        content: "";
-        background:
-          linear-gradient(90deg, rgba(255, 255, 255, 0.18), transparent 22%),
-          radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.28), transparent 22%);
-      }
-
-      .book-cover strong,
-      .book-cover span {
-        position: relative;
-      }
-
-      .book-cover strong {
-        font-size: 0.88rem;
-        line-height: 1.15;
-      }
-
-      .book-cover span {
-        font-size: 0.68rem;
-        opacity: 0.82;
-      }
-
-      .cover-blue {
-        background: linear-gradient(135deg, #003b71, #2f80ed);
-      }
-
-      .cover-red {
-        background: linear-gradient(135deg, #be123c, #7c2d12);
-      }
-
-      .cover-purple {
-        background: linear-gradient(135deg, #6d28d9, #2563eb);
-      }
-
-      .cover-green {
-        background: linear-gradient(135deg, #047857, #65a30d);
-      }
-
-      .listing-info {
-        min-width: 0;
-      }
-
-      .listing-info h3 {
-        margin: 0;
-        font-size: 1.05rem;
-        line-height: 1.35;
-      }
-
-      .meta {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 8px;
-        margin-top: 8px;
-        color: var(--muted);
-        font-size: 0.85rem;
-      }
-
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        min-height: 24px;
-        border-radius: 999px;
-        padding: 0 9px;
-        background: #eef4f8;
-        color: #3d4f60;
-        font-size: 0.78rem;
-        font-weight: 700;
-      }
-
-      .condition-good {
-        color: #047857;
-        background: #dcfce7;
-      }
-
-      .condition-note {
-        color: #b45309;
-        background: #fef3c7;
-      }
-
-      .listing-actions {
-        display: flex;
-        flex-direction: column;
-        align-items: flex-end;
-        justify-content: space-between;
-        gap: 12px;
-        text-align: right;
-      }
-
-      .price {
-        display: grid;
-        gap: 3px;
-      }
-
-      .price strong {
-        font-size: 1.35rem;
-      }
-
-      .price span {
-        color: var(--muted);
-        font-size: 0.78rem;
-        text-decoration: line-through;
-      }
-
-      .small-button {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: 7px;
-        min-height: 36px;
-        border-radius: 8px;
-        padding: 0 12px;
-        color: #ffffff;
-        background: var(--accent);
-        font-weight: 800;
-      }
-
-      .side-stack {
-        display: grid;
-        gap: 16px;
-        align-content: start;
-      }
-
-      .sell-panel .primary-button,
-      .checkout-panel .primary-button {
-        width: 100%;
-        margin-top: 14px;
-      }
-
-      .checkout-item {
-        display: grid;
-        grid-template-columns: 1fr auto;
-        gap: 8px;
-        padding: 10px 0;
-        border-bottom: 1px solid var(--line);
-        color: var(--muted);
-        font-size: 0.9rem;
-      }
-
-      .checkout-item strong {
-        color: var(--ink);
-      }
-
-      .total {
-        display: flex;
-        justify-content: space-between;
-        gap: 12px;
-        margin-top: 14px;
-        font-weight: 900;
-        font-size: 1.1rem;
-      }
-
-      .notice {
-        margin-top: 14px;
-        border-left: 3px solid var(--blue);
-        padding: 10px 12px;
-        color: var(--muted);
-        background: #eff6ff;
-        font-size: 0.86rem;
-        line-height: 1.55;
-      }
-
-      body {
-        background:
-          radial-gradient(circle at 18% 8%, rgba(47, 128, 237, 0.2), transparent 28%),
-          radial-gradient(circle at 88% 4%, rgba(255, 77, 141, 0.13), transparent 24%),
-          linear-gradient(180deg, #eef6ff 0, #f7f9fc 340px, #edf3fb 100%);
-      }
-
-      button {
-        transition: transform 160ms ease, box-shadow 160ms ease, background 160ms ease;
-      }
-
-      button:active {
-        transform: translateY(1px) scale(0.99);
-      }
-
-      header {
-        background: rgba(255, 255, 255, 0.78);
-      }
-
-      .brand-mark,
-      .primary-button,
-      .small-button {
-        background: linear-gradient(135deg, #004b8d, #2f80ed 70%, #ff4d8d);
-      }
-
-      .brand-mark,
-      .primary-button {
-        box-shadow: 0 14px 30px rgba(0, 75, 141, 0.24);
-      }
-
-      .search,
-      .ghost-button,
-      .primary-button,
-      .tabs,
-      .tab,
-      .sort,
-      .field input,
-      .field select,
-      .field textarea,
-      .small-button {
-        border-radius: 999px;
-      }
-
-      .summary-panel,
-      .metric,
-      .filters,
-      .listing,
-      .sell-panel,
-      .checkout-panel {
-        border-radius: 18px;
-        box-shadow: 0 18px 48px rgba(16, 24, 40, 0.08);
-      }
-
-      .summary-panel {
-        position: relative;
-        overflow: hidden;
-        color: #ffffff;
-        background:
-          linear-gradient(135deg, rgba(0, 75, 141, 0.97), rgba(16, 24, 40, 0.94)),
-          radial-gradient(circle at 86% 12%, rgba(255, 77, 141, 0.48), transparent 34%);
-      }
-
-      .summary-panel::after {
-        position: absolute;
-        top: -90px;
-        right: -70px;
-        width: 260px;
-        height: 260px;
-        border: 1px solid rgba(255, 255, 255, 0.18);
-        border-radius: 50%;
-        content: "";
-      }
-
-      .summary-panel p {
-        color: rgba(255, 255, 255, 0.78);
-      }
-
-      .metric {
-        background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), rgba(247, 251, 255, 0.94));
-      }
-
-      .tab.active {
-        background: linear-gradient(135deg, #101828, #004b8d);
-      }
-
-      .listing {
-        transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease, opacity 180ms ease;
-      }
-
-      .listing:hover {
-        border-color: rgba(0, 75, 141, 0.3);
-        box-shadow: 0 24px 56px rgba(16, 24, 40, 0.12);
-        transform: translateY(-2px);
-      }
-
-      .book-cover {
-        border-radius: 12px;
-      }
-
-      .small-button:hover,
-      .primary-button:hover {
-        box-shadow: 0 16px 34px rgba(0, 75, 141, 0.3);
-      }
-
-      .toast {
-        position: fixed;
-        right: 18px;
-        bottom: 18px;
-        z-index: 20;
-        width: min(360px, calc(100% - 36px));
-        border-radius: 16px;
-        padding: 14px 16px;
-        color: #ffffff;
-        background: rgba(16, 24, 40, 0.94);
-        box-shadow: 0 18px 50px rgba(16, 24, 40, 0.28);
-        opacity: 0;
-        pointer-events: none;
-        transform: translateY(14px);
-        transition: opacity 180ms ease, transform 180ms ease;
-      }
-
-      .toast.show {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .empty-state {
-        display: none;
-        border: 1px dashed var(--line);
-        border-radius: 18px;
-        padding: 28px;
-        color: var(--muted);
-        text-align: center;
-        background: rgba(255, 255, 255, 0.72);
-      }
-
-      .empty-state.show {
-        display: block;
-      }
-
-      @media (max-width: 1040px) {
-        .summary {
-          grid-template-columns: 1fr 1fr;
-        }
-
-        .summary-panel {
-          grid-column: 1 / -1;
-        }
-
-        .layout {
-          grid-template-columns: 240px minmax(0, 1fr);
-        }
-
-        .side-stack {
-          grid-column: 1 / -1;
-          grid-template-columns: 1fr 1fr;
-        }
-      }
-
-      @media (max-width: 760px) {
-        .topbar {
-          flex-wrap: wrap;
-        }
-
-        .brand {
-          width: 100%;
-        }
-
-        .nav-actions {
-          width: 100%;
-        }
-
-        .nav-actions .ghost-button,
-        .nav-actions .primary-button {
-          flex: 1;
-        }
-
-        .summary,
-        .layout,
-        .side-stack {
-          grid-template-columns: 1fr;
-        }
-
-        .listing {
-          grid-template-columns: 74px minmax(0, 1fr);
-        }
-
-        .listing-actions {
-          grid-column: 1 / -1;
-          flex-direction: row;
-          align-items: center;
-          text-align: left;
-        }
-
-        .market-toolbar {
-          align-items: stretch;
-          flex-direction: column;
-        }
-
-        .sort {
-          width: 100%;
-        }
-      }
-    </style>
+    <title>Trailfolio | 旅人がつくるオリジナルツアー</title>
     <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="app">
-      <header>
-        <div class="topbar">
-          <div class="brand" aria-label="Keio TextCycle">
-            <div class="brand-mark" aria-hidden="true">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-                <path d="M6 4h9a3 3 0 0 1 3 3v13H8a3 3 0 0 1-3-3V5a1 1 0 0 1 1-1Z" stroke="currentColor" stroke-width="2"/>
-                <path d="M8 17h10M9 8h6M9 11h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-            </div>
-            <span>Keio <span class="brand-accent">TextCycle</span></span>
-          </div>
-          <label class="search">
-            <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-              <path d="m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-            </svg>
-            <input id="search-input" type="search" placeholder="教科書名、授業名、ISBNで検索">
-          </label>
-          <div class="nav-actions">
-            <button class="ghost-button" type="button">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M4 6h16M7 12h10M10 18h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              探す
-            </button>
-            <button class="primary-button" type="button">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-                <path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-              </svg>
-              出品
-            </button>
-          </div>
-        </div>
+      <header class="site-header">
+        <a class="brand" href="index.html">Trailfolio</a>
+        <nav class="nav-links" aria-label="メインナビゲーション">
+          <a href="#discover">Explore</a>
+          <a href="#create">Create</a>
+          <a href="#stories">Stories</a>
+        </nav>
+        <a class="header-action" href="#create">Post a tour</a>
       </header>
 
       <main>
-        <section class="summary" aria-label="サービス概要">
-          <div class="summary-panel">
-            <h1>慶應の教科書を、安く・早く・学内で。</h1>
-            <p>USED TEXTBOOKS FOR KEIO STUDENTS</p>
-            <div class="choice-grid" aria-label="利用目的を選択">
-              <a class="choice-card" href="buy.html">
-                <span>BUY</span>
-                <strong>教科書を買う</strong>
-              </a>
-              <a class="choice-card" href="sell.html">
-                <span>SELL</span>
-                <strong>教科書を出品する</strong>
-              </a>
+        <section class="hero" aria-label="サービス概要">
+          <div class="hero-copy">
+            <span class="eyebrow">旅を投稿する。旅を見つける。</span>
+            <h1>Share your route.</h1>
+            <div class="hero-actions">
+              <a class="primary-button" href="#discover">Explore</a>
+              <a class="ghost-button" href="#create">Post</a>
             </div>
           </div>
-          <div class="metric">
-            <strong>712</strong>
-            <span>現在出品中の教科書</span>
-          </div>
-          <div class="metric">
-            <strong>42%</strong>
-            <span>平均で新品価格より安い</span>
-          </div>
-          <div class="metric">
-            <strong>14分</strong>
-            <span>キャンパス受け渡しの平均調整時間</span>
+          <div class="hero-panel" aria-label="注目ツアー">
+            <span>Featured</span>
+            <strong>Yakushima</strong>
+            <p>3 days · forest · sea</p>
           </div>
         </section>
 
-        <section class="layout" aria-label="マーケット">
-          <aside class="filters buy-view">
-            <div class="section-title">
-              <h2>絞り込み</h2>
-              <span>12件</span>
+        <section class="search-band" aria-label="検索">
+          <label>
+            <span>行き先</span>
+            <input id="search-input" type="search" placeholder="屋久島、上高地、アイスランド...">
+          </label>
+          <label>
+            <span>旅のタイプ</span>
+            <select>
+              <option>Nature escape</option>
+              <option>Local food</option>
+              <option>Weekend hike</option>
+              <option>Slow travel</option>
+            </select>
+          </label>
+          <button class="primary-button" type="button">Search</button>
+        </section>
+
+        <section class="section-head" id="discover">
+          <span>Discover</span>
+          <h2>Routes from travelers</h2>
+        </section>
+
+        <section class="tour-grid" aria-label="ツアー一覧">
+          <article class="tour-card" data-title="屋久島 苔の森と海辺の宿">
+            <img src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1200&q=80" alt="森の中の木道">
+            <div>
+              <span>Japan · 3 days</span>
+              <h3>Yakushima forest</h3>
+              <button type="button">View route</button>
             </div>
-            <div class="field">
-              <label for="campus">キャンパス</label>
-              <select id="campus">
-                <option>すべて</option>
-                <option>三田</option>
-                <option>日吉</option>
-                <option>矢上</option>
-                <option>SFC</option>
-                <option>配送</option>
-              </select>
+          </article>
+
+          <article class="tour-card" data-title="上高地 水辺を歩く週末">
+            <img src="https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1200&q=80" alt="山と湖の風景">
+            <div>
+              <span>Japan · 2 days</span>
+              <h3>Kamikochi river</h3>
+              <button type="button">View route</button>
             </div>
-            <div class="field">
-              <label for="department">学部・科目</label>
-              <select id="department">
-                <option>すべて</option>
-                <option>経済・商</option>
-                <option>理工・環境情報</option>
-                <option>語学・一般教養</option>
-                <option>法・総合政策</option>
-              </select>
+          </article>
+
+          <article class="tour-card" data-title="Iceland ring road light chase">
+            <img src="https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1200&q=80" alt="荒野を走る道">
+            <div>
+              <span>Iceland · 6 days</span>
+              <h3>Iceland ring road</h3>
+              <button type="button">View route</button>
             </div>
-            <div class="field">
-              <label for="condition">状態</label>
-              <select id="condition">
-                <option>指定なし</option>
-                <option>ほぼ新品</option>
-                <option>書き込み少なめ</option>
-                <option>書き込みあり</option>
-              </select>
-            </div>
-            <div class="field">
-              <label for="price">上限価格</label>
-              <input id="price" type="number" value="3500" min="0" step="100">
-            </div>
-            <label class="toggle-row">
-              <input type="checkbox" checked>
-              本日受け渡し可能
-            </label>
-            <label class="toggle-row">
-              <input type="checkbox">
-              配送対応のみ
-            </label>
-          </aside>
+          </article>
+        </section>
 
-          <section class="market buy-view">
-            <div class="market-toolbar">
-              <div class="tabs" aria-label="一覧切り替え">
-                <button class="tab active" type="button" data-tab="おすすめ">おすすめ</button>
-                <button class="tab" type="button" data-tab="新着">新着</button>
-                <button class="tab" type="button" data-tab="値下げ">値下げ</button>
-              </div>
-              <select class="sort" aria-label="並び替え">
-                <option>おすすめ順</option>
-                <option>価格が安い順</option>
-                <option>状態が良い順</option>
-              </select>
-            </div>
-
-            <div class="listings">
-              <article class="listing" data-title="経済学入門 ミクロ・マクロ" data-price="2400" data-search="経済学 ミクロ マクロ 三田 経済学部 isbn 978-4-0000-1234">
-                <div class="book-cover cover-blue">
-                  <strong>Microeconomics</strong>
-                  <span>7th Edition</span>
-                </div>
-                <div class="listing-info">
-                  <h3>経済学入門 ミクロ・マクロ</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">書き込み少なめ</span>
-                    <span>経済学部</span>
-                    <span>三田キャンパス</span>
-                    <span>ISBN 978-4-0000-1234</span>
-                  </div>
-                  <p>三田の経済学系科目で使用。章末問題に薄い鉛筆メモがあります。カバー付き。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥2,400</strong>
-                    <span>新品 ¥4,180</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="物理化学 基礎と演習" data-price="1800" data-search="物理化学 理工 矢上 日吉 匿名配送">
-                <div class="book-cover cover-red">
-                  <strong>Organic Chemistry</strong>
-                  <span>Lab Notes</span>
-                </div>
-                <div class="listing-info">
-                  <h3>物理化学 基礎と演習</h3>
-                  <div class="meta">
-                    <span class="chip condition-note">書き込みあり</span>
-                    <span>理工学部</span>
-                    <span>日吉キャンパス</span>
-                    <span>匿名配送可</span>
-                  </div>
-                  <p>矢上の理工系科目で使用。重要箇所にマーカーあり。演習前の確認に使いやすい索引メモ付き。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥1,800</strong>
-                    <span>新品 ¥3,960</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="データサイエンス基礎 Python演習" data-price="2900" data-search="データサイエンス python 理工 環境情報 sfc 矢上 配送">
-                <div class="book-cover cover-purple">
-                  <strong>Data Structures</strong>
-                  <span>Python</span>
-                </div>
-                <div class="listing-info">
-                  <h3>データサイエンス基礎 Python演習</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">ほぼ新品</span>
-                    <span>理工・環境情報</span>
-                    <span>矢上・SFC・配送</span>
-                    <span>24時間以内発送</span>
-                  </div>
-                  <p>SFCと理工系の演習で使いやすい一冊。購入後ほぼ未使用で、ISBN検索からも見つかります。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥2,900</strong>
-                    <span>新品 ¥4,620</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="Keio Academic Writing Skills" data-price="1200" data-search="academic english writing 語学 一般教養 日吉">
-                <div class="book-cover cover-green">
-                  <strong>Academic English</strong>
-                  <span>Writing</span>
-                </div>
-                <div class="listing-info">
-                  <h3>Keio Academic Writing Skills</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">書き込み少なめ</span>
-                    <span>語学・一般教養</span>
-                    <span>本日受け渡し可</span>
-                    <span>日吉</span>
-                  </div>
-                  <p>日吉の語学・一般教養で使用。Unit 1から4に軽いメモあり。課題提出用ページはきれいです。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥1,200</strong>
-                    <span>新品 ¥2,750</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="民法総則 第3版" data-price="2100" data-search="民法 総則 法学部 三田 日吉 isbn 978-4-1111-2045">
-                <div class="book-cover cover-blue">
-                  <strong>Civil Law</strong>
-                  <span>3rd Edition</span>
-                </div>
-                <div class="listing-info">
-                  <h3>民法総則 第3版</h3>
-                  <div class="meta">
-                    <span class="chip condition-note">書き込みあり</span>
-                    <span>法学部</span>
-                    <span>三田キャンパス</span>
-                    <span>ISBN 978-4-1111-2045</span>
-                  </div>
-                  <p>判例部分にマーカーがあります。授業で扱った条文に付箋メモ付きで、試験前の確認に向いています。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥2,100</strong>
-                    <span>新品 ¥3,850</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="統計学キャンパス演習" data-price="1600" data-search="統計学 演習 経済 商 SFC 日吉 データ分析">
-                <div class="book-cover cover-purple">
-                  <strong>Statistics</strong>
-                  <span>Exercises</span>
-                </div>
-                <div class="listing-info">
-                  <h3>統計学キャンパス演習</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">書き込み少なめ</span>
-                    <span>経済・商</span>
-                    <span>日吉キャンパス</span>
-                    <span>本日受け渡し可</span>
-                  </div>
-                  <p>記述統計から回帰分析までカバー。演習問題の一部に鉛筆で解法メモがあります。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥1,600</strong>
-                    <span>新品 ¥3,300</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="社会学への招待" data-price="900" data-search="社会学 一般教養 日吉 文学部 総合政策">
-                <div class="book-cover cover-green">
-                  <strong>Sociology</strong>
-                  <span>Intro</span>
-                </div>
-                <div class="listing-info">
-                  <h3>社会学への招待</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">ほぼ新品</span>
-                    <span>語学・一般教養</span>
-                    <span>日吉</span>
-                    <span>即日対応</span>
-                  </div>
-                  <p>購入後ほとんど使用していません。レポート課題の参考文献探しにも使いやすい構成です。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥900</strong>
-                    <span>新品 ¥2,420</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="会計学ベーシック" data-price="1900" data-search="会計学 簿記 商学部 経済 三田 日吉">
-                <div class="book-cover cover-red">
-                  <strong>Accounting</strong>
-                  <span>Basic</span>
-                </div>
-                <div class="listing-info">
-                  <h3>会計学ベーシック</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">書き込み少なめ</span>
-                    <span>商学部</span>
-                    <span>三田キャンパス</span>
-                    <span>配送可</span>
-                  </div>
-                  <p>財務諸表の章に薄いチェックあり。簿記未経験者でも読みやすい入門テキストです。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥1,900</strong>
-                    <span>新品 ¥3,740</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="線形代数と微分積分" data-price="2500" data-search="線形代数 微分積分 理工 矢上 日吉 数学">
-                <div class="book-cover cover-blue">
-                  <strong>Linear Algebra</strong>
-                  <span>Calculus</span>
-                </div>
-                <div class="listing-info">
-                  <h3>線形代数と微分積分</h3>
-                  <div class="meta">
-                    <span class="chip condition-note">書き込みあり</span>
-                    <span>理工学部</span>
-                    <span>矢上・日吉</span>
-                    <span>演習解説メモ付き</span>
-                  </div>
-                  <p>定理の横に補足メモがあります。演習問題は解いた跡がありますが、本文は読みやすい状態です。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥2,500</strong>
-                    <span>新品 ¥4,950</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="環境政策デザイン" data-price="2300" data-search="環境政策 総合政策 SFC 環境情報 配送">
-                <div class="book-cover cover-green">
-                  <strong>Policy Design</strong>
-                  <span>Environment</span>
-                </div>
-                <div class="listing-info">
-                  <h3>環境政策デザイン</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">ほぼ新品</span>
-                    <span>総合政策・環境情報</span>
-                    <span>SFC・配送</span>
-                    <span>24時間以内発送</span>
-                  </div>
-                  <p>SFCの政策系科目で使用。折れや汚れは少なく、ケーススタディ部分もきれいです。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥2,300</strong>
-                    <span>新品 ¥4,400</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="フランス語文法ワークブック" data-price="800" data-search="フランス語 語学 第二外国語 日吉 文法">
-                <div class="book-cover cover-red">
-                  <strong>Francais</strong>
-                  <span>Grammar</span>
-                </div>
-                <div class="listing-info">
-                  <h3>フランス語文法ワークブック</h3>
-                  <div class="meta">
-                    <span class="chip condition-note">書き込みあり</span>
-                    <span>語学・一般教養</span>
-                    <span>日吉</span>
-                    <span>本日受け渡し可</span>
-                  </div>
-                  <p>練習問題に一部記入があります。文法表はきれいで、復習用として使えます。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥800</strong>
-                    <span>新品 ¥2,200</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-
-              <article class="listing" data-title="メディア論と情報社会" data-price="1700" data-search="メディア論 情報社会 環境情報 総合政策 SFC 一般教養">
-                <div class="book-cover cover-purple">
-                  <strong>Media Studies</strong>
-                  <span>Society</span>
-                </div>
-                <div class="listing-info">
-                  <h3>メディア論と情報社会</h3>
-                  <div class="meta">
-                    <span class="chip condition-good">書き込み少なめ</span>
-                    <span>環境情報・一般教養</span>
-                    <span>SFC・日吉</span>
-                    <span>匿名配送可</span>
-                  </div>
-                  <p>各章の冒頭に小さなチェックがあります。ディスカッション準備に使いやすいテーマ別構成です。</p>
-                </div>
-                <div class="listing-actions">
-                  <div class="price">
-                    <strong>¥1,700</strong>
-                    <span>新品 ¥3,520</span>
-                  </div>
-                  <button class="small-button deal-button" type="button">取引する</button>
-                </div>
-              </article>
-              <div class="empty-state" id="empty-state">条件に合う教科書がありません。検索語や絞り込みを変えてみてください。</div>
-            </div>
-          </section>
-
-          <div class="side-stack">
-            <aside class="sell-panel sell-view">
-              <div class="section-title">
-                <h2>かんたん出品</h2>
-                <span>約1分</span>
-              </div>
-              <div class="field">
-                <label for="isbn">ISBN</label>
-                <input id="isbn" placeholder="978-4-..." inputmode="numeric">
-              </div>
-              <div class="field">
-                <label for="sell-condition">状態</label>
-                <select id="sell-condition">
-                  <option>ほぼ新品</option>
-                  <option>書き込み少なめ</option>
-                  <option>書き込みあり</option>
-                </select>
-              </div>
-              <div class="field">
-                <label for="sell-price">販売価格</label>
-                <input id="sell-price" type="number" placeholder="2400">
-              </div>
-              <button class="primary-button" id="create-listing" type="button">出品を作成</button>
-              <div class="notice">ISBNを入れると慶應の授業名候補、タイトル、著者、新品価格を自動補完する想定のUIです。</div>
-            </aside>
-
-            <aside class="checkout-panel buy-view">
-              <div class="section-title">
-                <h2>取引プレビュー</h2>
-                <span>安全確認</span>
-              </div>
-              <div class="checkout-item">
-                <span>経済学入門</span>
-                <strong>¥2,400</strong>
-              </div>
-              <div class="checkout-item">
-                <span>キャンパス受け渡し</span>
-                <strong>無料</strong>
-              </div>
-              <div class="checkout-item">
-                <span>購入者保護</span>
-                <strong>¥120</strong>
-              </div>
-              <div class="total">
-                <span>合計</span>
-                <span>¥2,520</span>
-              </div>
-              <button class="primary-button" id="chat-button" type="button">匿名チャットへ</button>
-              <div class="notice">支払いは受け取り確認後に売上へ反映される想定です。</div>
-            </aside>
+        <section class="split-section" id="create">
+          <div>
+            <span class="eyebrow">Create</span>
+            <h2>Post your trip.</h2>
           </div>
+          <form class="tour-form">
+            <label>
+              <span>ツアータイトル</span>
+              <input placeholder="例: 初夏の尾瀬を歩く2日間">
+            </label>
+            <label>
+              <span>エリア</span>
+              <input placeholder="群馬・福島 / 尾瀬">
+            </label>
+            <label>
+              <span>旅の日数</span>
+              <select>
+                <option>日帰り</option>
+                <option>1泊2日</option>
+                <option>2泊3日</option>
+                <option>4日以上</option>
+              </select>
+            </label>
+            <label>
+              <span>おすすめポイント</span>
+              <textarea placeholder="朝の湿原、木道、山小屋ごはんなど"></textarea>
+            </label>
+            <button class="primary-button" type="button">Preview tour</button>
+          </form>
+        </section>
+
+        <section class="story-strip" id="stories" aria-label="ストーリー">
+          <article>
+            <strong>128</strong>
+            <span>posted routes</span>
+          </article>
+          <article>
+            <strong>34</strong>
+            <span>areas</span>
+          </article>
+          <article>
+            <strong>4.8</strong>
+            <span>rating</span>
+          </article>
         </section>
       </main>
     </div>
+
+    <script>
+      const searchInput = document.querySelector("#search-input");
+      const cards = [...document.querySelectorAll(".tour-card")];
+
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        cards.forEach((card) => {
+          card.style.display = card.dataset.title.toLowerCase().includes(query) || !query ? "" : "none";
+        });
+      });
+    </script>
   </body>
 </html>
