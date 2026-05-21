@@ -743,13 +743,13 @@
                 <path d="M8 17h10M9 8h6M9 11h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </div>
-            <span>KEIO<span class="brand-accent">BOOKS</span></span>
+            <span>Keio <span class="brand-accent">TextCycle</span></span>
           </div>
           <label class="search">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <input id="search-input" type="search" placeholder="Search for textbooks">
+            <input id="search-input" type="search" placeholder="教科書名、授業名、ISBNで検索">
           </label>
           <div class="nav-actions">
             <button class="ghost-button" type="button">
@@ -771,11 +771,17 @@
       <main>
         <section class="summary" aria-label="サービス概要">
           <div class="summary-panel">
-            <h1>KEIOBOOKS</h1>
-            <p>KEIO UNIVERSITY TEXTBOOK MARKET</p>
-            <div class="quick-actions">
-              <button class="primary-button" type="button">今すぐ探す</button>
-              <button class="ghost-button" type="button">ISBNで出品</button>
+            <h1>慶應の教科書を、安く・早く・学内で。</h1>
+            <p>USED TEXTBOOKS FOR KEIO STUDENTS</p>
+            <div class="choice-grid" aria-label="利用目的を選択">
+              <a class="choice-card" href="buy.html">
+                <span>BUY</span>
+                <strong>教科書を買う</strong>
+              </a>
+              <a class="choice-card" href="sell.html">
+                <span>SELL</span>
+                <strong>教科書を出品する</strong>
+              </a>
             </div>
           </div>
           <div class="metric">
@@ -793,7 +799,7 @@
         </section>
 
         <section class="layout" aria-label="マーケット">
-          <aside class="filters">
+          <aside class="filters buy-view">
             <div class="section-title">
               <h2>絞り込み</h2>
               <span>12件</span>
@@ -842,7 +848,7 @@
             </label>
           </aside>
 
-          <section class="market">
+          <section class="market buy-view">
             <div class="market-toolbar">
               <div class="tabs" aria-label="一覧切り替え">
                 <button class="tab active" type="button" data-tab="おすすめ">おすすめ</button>
@@ -1149,7 +1155,7 @@
           </section>
 
           <div class="side-stack">
-            <aside class="sell-panel">
+            <aside class="sell-panel sell-view">
               <div class="section-title">
                 <h2>かんたん出品</h2>
                 <span>約1分</span>
@@ -1174,7 +1180,7 @@
               <div class="notice">ISBNを入れると慶應の授業名候補、タイトル、著者、新品価格を自動補完する想定のUIです。</div>
             </aside>
 
-            <aside class="checkout-panel">
+            <aside class="checkout-panel buy-view">
               <div class="section-title">
                 <h2>取引プレビュー</h2>
                 <span>安全確認</span>
@@ -1202,98 +1208,5 @@
         </section>
       </main>
     </div>
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
-    <script>
-      const searchInput = document.querySelector("#search-input");
-      const listings = [...document.querySelectorAll(".listing")];
-      const emptyState = document.querySelector("#empty-state");
-      const toast = document.querySelector("#toast");
-      const tabs = [...document.querySelectorAll(".tab")];
-      const sort = document.querySelector(".sort");
-      const filters = [...document.querySelectorAll(".filters select, .filters input")];
-      const checkoutRows = [...document.querySelectorAll(".checkout-item")];
-      const total = document.querySelector(".total span:last-child");
-      let toastTimer;
-
-      function showToast(message) {
-        toast.textContent = message;
-        toast.classList.add("show");
-        clearTimeout(toastTimer);
-        toastTimer = setTimeout(() => toast.classList.remove("show"), 2200);
-      }
-
-      function filterListings() {
-        const query = searchInput.value.trim().toLowerCase();
-        let visible = 0;
-
-        listings.forEach((listing) => {
-          const haystack = `${listing.dataset.title} ${listing.dataset.search}`.toLowerCase();
-          const match = !query || haystack.includes(query);
-          listing.style.display = match ? "" : "none";
-          visible += match ? 1 : 0;
-        });
-
-        emptyState.classList.toggle("show", visible === 0);
-      }
-
-      document.querySelectorAll("button").forEach((button) => {
-        button.addEventListener("click", () => {
-          if (!button.classList.contains("tab") && !button.classList.contains("deal-button")) {
-            showToast(`${button.textContent.trim()}を開きました`);
-          }
-        });
-      });
-
-      document.querySelectorAll(".nav-actions .ghost-button, .quick-actions .primary-button").forEach((button) => {
-        button.addEventListener("click", () => {
-          searchInput.focus();
-          document.querySelector(".market").scrollIntoView({ behavior: "smooth", block: "start" });
-        });
-      });
-
-      document.querySelectorAll(".nav-actions .primary-button, .quick-actions .ghost-button").forEach((button) => {
-        button.addEventListener("click", () => {
-          document.querySelector(".sell-panel").scrollIntoView({ behavior: "smooth", block: "center" });
-          document.querySelector("#isbn").focus();
-        });
-      });
-
-      tabs.forEach((tab) => {
-        tab.addEventListener("click", () => {
-          tabs.forEach((item) => item.classList.remove("active"));
-          tab.classList.add("active");
-          showToast(`${tab.dataset.tab}の教科書を表示しました`);
-        });
-      });
-
-      document.querySelectorAll(".deal-button").forEach((button) => {
-        button.addEventListener("click", () => {
-          const listing = button.closest(".listing");
-          const title = listing.dataset.title;
-          const price = Number(listing.dataset.price);
-          checkoutRows[0].querySelector("span").textContent = title;
-          checkoutRows[0].querySelector("strong").textContent = `¥${price.toLocaleString()}`;
-          total.textContent = `¥${(price + 120).toLocaleString()}`;
-          showToast(`${title}を取引プレビューに入れました`);
-          document.querySelector(".checkout-panel").scrollIntoView({ behavior: "smooth", block: "center" });
-        });
-      });
-
-      searchInput.addEventListener("input", filterListings);
-      filters.forEach((control) => {
-        control.addEventListener("change", () => showToast("絞り込み条件を更新しました"));
-      });
-      sort.addEventListener("change", () => showToast(`${sort.value}に並び替えました`));
-
-      document.querySelector("#create-listing").addEventListener("click", () => {
-        const isbn = document.querySelector("#isbn").value.trim();
-        const price = document.querySelector("#sell-price").value.trim();
-        showToast(isbn || price ? "出品プレビューを作成しました" : "ISBNと価格を入力すると出品できます");
-      });
-
-      document.querySelector("#chat-button").addEventListener("click", () => {
-        showToast("匿名チャットを開始しました");
-      });
-    </script>
   </body>
 </html>

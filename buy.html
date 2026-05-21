@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Buy | Keio TextCycle</title>
+    <link rel="stylesheet" href="styles.css">
+  </head>
+  <body>
+    <div class="app page-shell">
+      <header>
+        <div class="topbar">
+          <a class="brand" href="index.html">Keio <span class="brand-accent">TextCycle</span></a>
+          <label class="search">
+            <input id="search-input" type="search" placeholder="教科書名、授業名、ISBNで検索">
+          </label>
+          <div class="nav-actions">
+            <a class="ghost-button" href="index.html">TOP</a>
+            <a class="primary-button" href="sell.html">SELL</a>
+          </div>
+        </div>
+      </header>
+
+      <main>
+        <section class="page-hero">
+          <span>BUY / USED TEXTBOOKS</span>
+          <h1>Find the book before class starts.</h1>
+        </section>
+
+        <section class="layout view-buy" aria-label="購入ページ">
+          <aside class="filters buy-view">
+            <div class="section-title">
+              <h2>Filter</h2>
+              <span>12</span>
+            </div>
+            <div class="field">
+              <label for="campus">キャンパス</label>
+              <select id="campus">
+                <option>すべて</option>
+                <option>三田</option>
+                <option>日吉</option>
+                <option>矢上</option>
+                <option>SFC</option>
+                <option>配送</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="department">学部・科目</label>
+              <select id="department">
+                <option>すべて</option>
+                <option>経済・商</option>
+                <option>理工・環境情報</option>
+                <option>語学・一般教養</option>
+                <option>法・総合政策</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="price">上限価格</label>
+              <input id="price" type="number" value="3500" min="0" step="100">
+            </div>
+          </aside>
+
+          <section class="market buy-view">
+            <div class="market-toolbar">
+              <div class="tabs">
+                <button class="tab active" type="button">おすすめ</button>
+                <button class="tab" type="button">新着</button>
+                <button class="tab" type="button">値下げ</button>
+              </div>
+              <select class="sort">
+                <option>おすすめ順</option>
+                <option>価格が安い順</option>
+              </select>
+            </div>
+
+            <div class="listings">
+              <article class="listing" data-title="経済学入門 ミクロ・マクロ" data-search="経済学 ミクロ マクロ 三田 経済学部">
+                <div class="book-cover cover-blue"><strong>ECON</strong><span>101</span></div>
+                <div class="listing-info">
+                  <h3>経済学入門 ミクロ・マクロ</h3>
+                  <div class="meta"><span class="chip condition-good">書き込み少なめ</span><span>三田</span><span>経済学部</span></div>
+                </div>
+                <div class="listing-actions"><div class="price"><strong>¥2,400</strong><span>新品 ¥4,180</span></div><button class="small-button" type="button">取引する</button></div>
+              </article>
+              <article class="listing" data-title="データサイエンス基礎 Python演習" data-search="python データサイエンス SFC 矢上">
+                <div class="book-cover cover-purple"><strong>DATA</strong><span>PY</span></div>
+                <div class="listing-info">
+                  <h3>データサイエンス基礎 Python演習</h3>
+                  <div class="meta"><span class="chip condition-good">ほぼ新品</span><span>SFC</span><span>配送可</span></div>
+                </div>
+                <div class="listing-actions"><div class="price"><strong>¥2,900</strong><span>新品 ¥4,620</span></div><button class="small-button" type="button">取引する</button></div>
+              </article>
+              <article class="listing" data-title="民法総則 第3版" data-search="民法 法学部 三田">
+                <div class="book-cover cover-red"><strong>LAW</strong><span>3rd</span></div>
+                <div class="listing-info">
+                  <h3>民法総則 第3版</h3>
+                  <div class="meta"><span class="chip condition-note">書き込みあり</span><span>三田</span><span>法学部</span></div>
+                </div>
+                <div class="listing-actions"><div class="price"><strong>¥2,100</strong><span>新品 ¥3,850</span></div><button class="small-button" type="button">取引する</button></div>
+              </article>
+              <article class="listing" data-title="Keio Academic Writing Skills" data-search="english writing 日吉">
+                <div class="book-cover cover-green"><strong>WRITE</strong><span>EN</span></div>
+                <div class="listing-info">
+                  <h3>Keio Academic Writing Skills</h3>
+                  <div class="meta"><span class="chip condition-good">書き込み少なめ</span><span>日吉</span><span>語学</span></div>
+                </div>
+                <div class="listing-actions"><div class="price"><strong>¥1,200</strong><span>新品 ¥2,750</span></div><button class="small-button" type="button">取引する</button></div>
+              </article>
+              <div class="empty-state" id="empty-state">条件に合う教科書がありません。</div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script>
+      const searchInput = document.querySelector("#search-input");
+      const listings = [...document.querySelectorAll(".listing")];
+      const emptyState = document.querySelector("#empty-state");
+      searchInput.addEventListener("input", () => {
+        const query = searchInput.value.trim().toLowerCase();
+        let visible = 0;
+        listings.forEach((listing) => {
+          const match = !query || `${listing.dataset.title} ${listing.dataset.search}`.toLowerCase().includes(query);
+          listing.style.display = match ? "" : "none";
+          visible += match ? 1 : 0;
+        });
+        emptyState.classList.toggle("show", visible === 0);
+      });
+    </script>
+  </body>
+</html>
