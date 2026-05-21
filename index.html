@@ -730,6 +730,7 @@
         }
       }
     </style>
+    <link rel="stylesheet" href="styles.css">
   </head>
   <body>
     <div class="app">
@@ -742,13 +743,13 @@
                 <path d="M8 17h10M9 8h6M9 11h5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
               </svg>
             </div>
-            <span>Keio TextCycle</span>
+            <span>KEIO<span class="brand-accent">BOOKS</span></span>
           </div>
           <label class="search">
             <svg width="19" height="19" viewBox="0 0 24 24" fill="none" aria-hidden="true">
               <path d="m21 21-4.3-4.3M10.8 18a7.2 7.2 0 1 1 0-14.4 7.2 7.2 0 0 1 0 14.4Z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
             </svg>
-            <input id="search-input" type="search" placeholder="教科書名、ISBN、授業名、教授名で検索">
+            <input id="search-input" type="search" placeholder="Search for textbooks">
           </label>
           <div class="nav-actions">
             <button class="ghost-button" type="button">
@@ -770,15 +771,15 @@
       <main>
         <section class="summary" aria-label="サービス概要">
           <div class="summary-panel">
-            <h1>慶應の教科書を、学内で安く早く。</h1>
-            <p>Keio TextCycleは、慶應義塾大学生向けの中古教科書マーケットです。授業名やISBNで探して、日吉・三田・矢上・湘南藤沢での受け渡し、配送、匿名チャットで取引できます。</p>
+            <h1>KEIOBOOKS</h1>
+            <p>KEIO UNIVERSITY TEXTBOOK MARKET</p>
             <div class="quick-actions">
               <button class="primary-button" type="button">今すぐ探す</button>
               <button class="ghost-button" type="button">ISBNで出品</button>
             </div>
           </div>
           <div class="metric">
-            <strong>684</strong>
+            <strong>712</strong>
             <span>現在出品中の教科書</span>
           </div>
           <div class="metric">
@@ -795,7 +796,7 @@
           <aside class="filters">
             <div class="section-title">
               <h2>絞り込み</h2>
-              <span>8件</span>
+              <span>12件</span>
             </div>
             <div class="field">
               <label for="campus">キャンパス</label>
@@ -803,7 +804,9 @@
                 <option>すべて</option>
                 <option>三田</option>
                 <option>日吉</option>
-                <option>矢上・SFC・配送</option>
+                <option>矢上</option>
+                <option>SFC</option>
+                <option>配送</option>
               </select>
             </div>
             <div class="field">
@@ -827,7 +830,7 @@
             </div>
             <div class="field">
               <label for="price">上限価格</label>
-              <input id="price" type="number" value="3500" min="0">
+              <input id="price" type="number" value="3500" min="0" step="100">
             </div>
             <label class="toggle-row">
               <input type="checkbox" checked>
@@ -945,6 +948,198 @@
                   <div class="price">
                     <strong>¥1,200</strong>
                     <span>新品 ¥2,750</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="民法総則 第3版" data-price="2100" data-search="民法 総則 法学部 三田 日吉 isbn 978-4-1111-2045">
+                <div class="book-cover cover-blue">
+                  <strong>Civil Law</strong>
+                  <span>3rd Edition</span>
+                </div>
+                <div class="listing-info">
+                  <h3>民法総則 第3版</h3>
+                  <div class="meta">
+                    <span class="chip condition-note">書き込みあり</span>
+                    <span>法学部</span>
+                    <span>三田キャンパス</span>
+                    <span>ISBN 978-4-1111-2045</span>
+                  </div>
+                  <p>判例部分にマーカーがあります。授業で扱った条文に付箋メモ付きで、試験前の確認に向いています。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥2,100</strong>
+                    <span>新品 ¥3,850</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="統計学キャンパス演習" data-price="1600" data-search="統計学 演習 経済 商 SFC 日吉 データ分析">
+                <div class="book-cover cover-purple">
+                  <strong>Statistics</strong>
+                  <span>Exercises</span>
+                </div>
+                <div class="listing-info">
+                  <h3>統計学キャンパス演習</h3>
+                  <div class="meta">
+                    <span class="chip condition-good">書き込み少なめ</span>
+                    <span>経済・商</span>
+                    <span>日吉キャンパス</span>
+                    <span>本日受け渡し可</span>
+                  </div>
+                  <p>記述統計から回帰分析までカバー。演習問題の一部に鉛筆で解法メモがあります。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥1,600</strong>
+                    <span>新品 ¥3,300</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="社会学への招待" data-price="900" data-search="社会学 一般教養 日吉 文学部 総合政策">
+                <div class="book-cover cover-green">
+                  <strong>Sociology</strong>
+                  <span>Intro</span>
+                </div>
+                <div class="listing-info">
+                  <h3>社会学への招待</h3>
+                  <div class="meta">
+                    <span class="chip condition-good">ほぼ新品</span>
+                    <span>語学・一般教養</span>
+                    <span>日吉</span>
+                    <span>即日対応</span>
+                  </div>
+                  <p>購入後ほとんど使用していません。レポート課題の参考文献探しにも使いやすい構成です。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥900</strong>
+                    <span>新品 ¥2,420</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="会計学ベーシック" data-price="1900" data-search="会計学 簿記 商学部 経済 三田 日吉">
+                <div class="book-cover cover-red">
+                  <strong>Accounting</strong>
+                  <span>Basic</span>
+                </div>
+                <div class="listing-info">
+                  <h3>会計学ベーシック</h3>
+                  <div class="meta">
+                    <span class="chip condition-good">書き込み少なめ</span>
+                    <span>商学部</span>
+                    <span>三田キャンパス</span>
+                    <span>配送可</span>
+                  </div>
+                  <p>財務諸表の章に薄いチェックあり。簿記未経験者でも読みやすい入門テキストです。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥1,900</strong>
+                    <span>新品 ¥3,740</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="線形代数と微分積分" data-price="2500" data-search="線形代数 微分積分 理工 矢上 日吉 数学">
+                <div class="book-cover cover-blue">
+                  <strong>Linear Algebra</strong>
+                  <span>Calculus</span>
+                </div>
+                <div class="listing-info">
+                  <h3>線形代数と微分積分</h3>
+                  <div class="meta">
+                    <span class="chip condition-note">書き込みあり</span>
+                    <span>理工学部</span>
+                    <span>矢上・日吉</span>
+                    <span>演習解説メモ付き</span>
+                  </div>
+                  <p>定理の横に補足メモがあります。演習問題は解いた跡がありますが、本文は読みやすい状態です。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥2,500</strong>
+                    <span>新品 ¥4,950</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="環境政策デザイン" data-price="2300" data-search="環境政策 総合政策 SFC 環境情報 配送">
+                <div class="book-cover cover-green">
+                  <strong>Policy Design</strong>
+                  <span>Environment</span>
+                </div>
+                <div class="listing-info">
+                  <h3>環境政策デザイン</h3>
+                  <div class="meta">
+                    <span class="chip condition-good">ほぼ新品</span>
+                    <span>総合政策・環境情報</span>
+                    <span>SFC・配送</span>
+                    <span>24時間以内発送</span>
+                  </div>
+                  <p>SFCの政策系科目で使用。折れや汚れは少なく、ケーススタディ部分もきれいです。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥2,300</strong>
+                    <span>新品 ¥4,400</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="フランス語文法ワークブック" data-price="800" data-search="フランス語 語学 第二外国語 日吉 文法">
+                <div class="book-cover cover-red">
+                  <strong>Francais</strong>
+                  <span>Grammar</span>
+                </div>
+                <div class="listing-info">
+                  <h3>フランス語文法ワークブック</h3>
+                  <div class="meta">
+                    <span class="chip condition-note">書き込みあり</span>
+                    <span>語学・一般教養</span>
+                    <span>日吉</span>
+                    <span>本日受け渡し可</span>
+                  </div>
+                  <p>練習問題に一部記入があります。文法表はきれいで、復習用として使えます。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥800</strong>
+                    <span>新品 ¥2,200</span>
+                  </div>
+                  <button class="small-button deal-button" type="button">取引する</button>
+                </div>
+              </article>
+
+              <article class="listing" data-title="メディア論と情報社会" data-price="1700" data-search="メディア論 情報社会 環境情報 総合政策 SFC 一般教養">
+                <div class="book-cover cover-purple">
+                  <strong>Media Studies</strong>
+                  <span>Society</span>
+                </div>
+                <div class="listing-info">
+                  <h3>メディア論と情報社会</h3>
+                  <div class="meta">
+                    <span class="chip condition-good">書き込み少なめ</span>
+                    <span>環境情報・一般教養</span>
+                    <span>SFC・日吉</span>
+                    <span>匿名配送可</span>
+                  </div>
+                  <p>各章の冒頭に小さなチェックがあります。ディスカッション準備に使いやすいテーマ別構成です。</p>
+                </div>
+                <div class="listing-actions">
+                  <div class="price">
+                    <strong>¥1,700</strong>
+                    <span>新品 ¥3,520</span>
                   </div>
                   <button class="small-button deal-button" type="button">取引する</button>
                 </div>
